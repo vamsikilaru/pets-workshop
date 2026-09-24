@@ -13,8 +13,17 @@ jobs:
   test-api:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ['3.12', '3.13', '3.14']
+        os: [ubuntu-latest, ubuntu-22.04]
+        exclude:
+          - python-version: '3.14'
+            os: ubuntu-22.04
+        include:
+          - python-version: '3.14'
+            os: ubuntu-latest
+            experimental: true
 
     steps:
       - uses: actions/checkout@v7
